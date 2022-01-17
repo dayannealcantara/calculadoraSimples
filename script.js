@@ -9,20 +9,20 @@ let numeroAnterior;
 const operacaoPendente = () => operador !== undefined;
 
 const calcular = () => {
-    if(operacaoPendente()){
-        const numeroAtual = parseFloat(display.textContent);
-        novoNumero = true;
-        if (operador == '+'){
-            atualizarDisplay(numeroAnterior + numeroAtual)
-        } else if (operador == '-') {
-            atualizarDisplay(numeroAnterior - numeroAtual)
-        }else if (operador == '*') {
-            atualizarDisplay(numeroAnterior * numeroAtual)
-        }else if (operador == '/') {
-            atualizarDisplay(numeroAnterior / numeroAtual)
-        }
+  if (operacaoPendente()) {
+    const numeroAtual = parseFloat(display.textContent);
+    novoNumero = true;
+    if (operador == "+") {
+      atualizarDisplay(numeroAnterior + numeroAtual);
+    } else if (operador == "-") {
+      atualizarDisplay(numeroAnterior - numeroAtual);
+    } else if (operador == "*") {
+      atualizarDisplay(numeroAnterior * numeroAtual);
+    } else if (operador == "/") {
+      atualizarDisplay(numeroAnterior / numeroAtual);
     }
-}
+  }
+};
 
 const atualizarDisplay = (texto) => {
   if (novoNumero) {
@@ -34,7 +34,7 @@ const atualizarDisplay = (texto) => {
 };
 
 const inserirNumero = (evento) => atualizarDisplay(evento.target.textContent);
-numeros.forEach(numero => numero.addEventListener("click", inserirNumero));
+numeros.forEach((numero) => numero.addEventListener("click", inserirNumero));
 
 const selecionarOperador = (evento) => {
   if (!novoNumero) {
@@ -42,17 +42,30 @@ const selecionarOperador = (evento) => {
     novoNumero = true;
     operador = evento.target.textContent;
     numeroAnterior = parseFloat(display.textContent);
-    
   }
 };
 
-operadores.forEach(operador => operador.addEventListener("click", selecionarOperador));
+operadores.forEach((operador) =>
+  operador.addEventListener("click", selecionarOperador)
+);
 const ativarIgual = () => {
-    calcular();
-    operador = undefined
-}
-document.getElementById('igual').addEventListener('click', ativarIgual)
+  calcular();
+  operador = undefined;
+};
+document.getElementById("igual").addEventListener("click", ativarIgual);
 
-const limparDisplay = () => display.textContent = '';
-document.getElementById('limparDisplay').addEventListener('click', limparDisplay)
+const limparDisplay = () => (display.textContent = "");
+document
+  .getElementById("limparDisplay")
+  .addEventListener("click", limparDisplay);
 
+const limparCalculo = () => {
+  limparDisplay();
+  operador = undefined;
+  novoNumero = true;
+  numeroAnterior = undefined;
+};
+
+document
+  .getElementById("limparCalculo")
+  .addEventListener("click", limparCalculo);
