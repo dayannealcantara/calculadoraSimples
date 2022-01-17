@@ -69,3 +69,7 @@ const limparCalculo = () => {
 document
   .getElementById("limparCalculo")
   .addEventListener("click", limparCalculo);
+
+
+const removeUltimoDigito = () => display.textContent = display.textContent.slice(0, -1)
+document.getElementById('backspace').addEventListener('click', removeUltimoDigito )
