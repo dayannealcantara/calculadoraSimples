@@ -10,7 +10,7 @@ const operacaoPendente = () => operador !== undefined;
 
 const calcular = () => {
   if (operacaoPendente()) {
-    const numeroAtual = parseFloat(display.textContent);
+    const numeroAtual = parseFloat(display.textContent.replace( ' ,', '.'));
     novoNumero = true;
     if (operador == "+") {
       atualizarDisplay(numeroAnterior + numeroAtual);
@@ -26,10 +26,10 @@ const calcular = () => {
 
 const atualizarDisplay = (texto) => {
   if (novoNumero) {
-    display.textContent = texto;
+    display.textContent = texto.toLocaleString('BR');
     novoNumero = false;
   } else {
-    display.textContent += texto;
+    display.textContent += texto.toLocaleString('BR');
   }
 };
 
@@ -41,7 +41,7 @@ const selecionarOperador = (evento) => {
     calcular();
     novoNumero = true;
     operador = evento.target.textContent;
-    numeroAnterior = parseFloat(display.textContent);
+    numeroAnterior = parseFloat(display.textContent.replace(',', '.'));
   }
 };
 
@@ -73,3 +73,18 @@ document
 
 const removeUltimoDigito = () => display.textContent = display.textContent.slice(0, -1)
 document.getElementById('backspace').addEventListener('click', removeUltimoDigito )
+
+const existeDecimal = () => display.textContent.indexOf(',') !== -1;
+const existeValor = () => display.textContent.length > 0;
+
+const inserirDecimal = () => {
+    if (!existeDecimal()) {
+        if(existeValor()) {
+            atualizarDisplay(',')
+        } else {
+            atualizarDisplay('0,')
+        }
+    }
+} 
+    
+document.getElementById('decimal').addEventListener('click', inserirDecimal)
