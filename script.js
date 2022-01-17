@@ -53,3 +53,6 @@ const ativarIgual = () => {
 }
 document.getElementById('igual').addEventListener('click', ativarIgual)
 
+const limparDisplay = () => display.textContent = '';
+document.getElementById('limparDisplay').addEventListener('click', limparDisplay)
+
